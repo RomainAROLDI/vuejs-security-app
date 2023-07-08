@@ -62,7 +62,7 @@ export default {
 
             const { _id, title, description, user } = existingPost
 
-            if (!this.isAuthorized(user)) {
+            if (!this.isAuthorized(user._id)) {
                 this.$router.push('/articles')
                 return
             }

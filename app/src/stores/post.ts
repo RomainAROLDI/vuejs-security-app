@@ -30,7 +30,7 @@ export const usePostStore = defineStore('post', {
             return this.posts.find(post => post._id === id)
         },
         getPost(id: string) {
-            axios.get('http://localhost:3000/posts/' + id, config).then((resp) => {
+            return axios.get('http://localhost:3000/posts/' + id, config).then((resp) => {
                 const post = this.getPostData(id)
                 if (resp.status === 200 && resp.data._id) {
                     const { _id, title, description, user, likes, commentsCount } = resp.data
@@ -40,12 +40,11 @@ export const usePostStore = defineStore('post', {
                     } else {
                         this.posts.push({ _id, title, description, user, likes, commentsCount, comments: [] })
                     }
-                    console.log(post)
                 }
             })
         },
         updatePost(id: string, post: PostInterface) {
-            axios.put('http://localhost:3000/posts/' + id, post, config).then((resp) => {
+            return axios.put('http://localhost:3000/posts/' + id, post, config).then((resp) => {
                 const post = this.getPostData(id)
                 if (resp.status === 200 && resp.data._id) {
                     const { _id, title, description, user, likes, commentsCount } = resp.data
@@ -59,7 +58,7 @@ export const usePostStore = defineStore('post', {
             })
         },
         createPost(post: PostInterface) {
-            axios.post('http://localhost:3000/posts', post, config).then((resp) => {
+            return axios.post('http://localhost:3000/posts', post, config).then((resp) => {
                 if (resp.status === 200 && resp.data._id) {
                     const { _id, title, description, user, likes, commentsCount } = resp.data
 
